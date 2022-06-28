@@ -1,8 +1,10 @@
 <?php
     use PHPMailer\PHPMailer\PHPMailer;
-    require_once "libs/PHPMailer/PHPMailer.php";
-    require_once "libs/PHPMailer/SMTP.php";
-    require_once "libs/PHPMailer/Exception.php";
+    use PHPMailer\PHPMailer\Exception;
+    use PHPMailer\PHPMailer\SMTP;
+    require_once "libs/PHPMailer/src/PHPMailer.php";
+    require_once "libs/PHPMailer/src/SMTP.php";
+    require_once "libs/PHPMailer/src/Exception.php";
     require 'models/userModel.php';
     require 'models/user.php';
 
@@ -167,6 +169,77 @@
             }
         }
 
+        // public static function reset(){
+        //     try{
+        //         $objum = new userModel();
+        //         $message = "";
+        //         if(isset($_POST['user'])){
+        //             $username = $_POST['user'];
+        //             $objum->open_db();
+        //             $query1=$objum->condb->prepare("SELECT * FROM user WHERE username = '".$username."'"); 
+        //             $query1->execute();
+        //             $res=$query1->get_result();
+        //             $row1 = mysqli_fetch_array($res);
+        //             $id = $row1['id'];
+        //             $email = $row1['email'];
+        //             $name = $row1['name'];
+        //             $lastName = $row1['last_name'];
+        //             if(!empty($username)){
+        //                 if(!empty($id)){
+        //                     $objum->open_db();
+        //                     $query=$objum->condb->prepare("SELECT resetpassword('".$id."') as password"); 
+        //                     $query->execute();
+        //                     $res=$query->get_result();
+        //                     $row = mysqli_fetch_array($res);
+        //                     $rst = $row['password'];
+
+        //                     $mail = new PHPMailer();
+        //                     $mail->isSMTP();
+        //                     $mail->Host = 'smtp.gmail.com';
+        //                     $mail->SMTPAuth = true;
+        //                     $mail->Username = 'mirwaisdst@gmail.com';
+        //                     $mail->Password = 'zpzdmddxkmmczdvp';
+        //                     $mail->port = '587'; //465
+        //                     $mail->SMTPSecure = 'tls';
+        //                     $mail->isHTML(true);  
+        //                     $mail->setFrom('mirwaisdst@gmail.com');
+        //                     $mail->addAddress($email);
+        //                     $mail->addBCC('mirwaisdoost@hotmail.com');
+        //                     $mail->Subject = 'RESET PASSWORD';
+        //                     $mailContent = "<h4>Dear $name $lastName,</h4>
+        //                                     <p>Your password has been reseted.</p>
+        //                                     <p>Password: $rst</p>
+        //                                     <br> 
+        //                                     <p>Best regards,</p>
+        //                                     <p>Mirwais Doost</p>
+        //                                     <p>0093 795 703 071</p>
+        //                                     <p>0093 708 411 861</p>";
+        //                     $mail->Body = $mailContent;
+                            
+        //                     if($mail->send()){
+        //                         $message = "Mail has been sent succesfully!";
+        //                         $index = 0;
+        //                         echo json_encode(array("index" => $index, "message" => $message));
+        //                     }else{
+        //                         $index = 1;
+        //                         $message = "Unable to send email. Please try again. " . $mail->ErrorInfo;
+        //                         echo json_encode(array("index" => $index, "message" => $message));        
+        //                     }
+        //                 }else{
+        //                     $index = 2;
+        //                     $message = "No account found with that username.";
+        //                     echo json_encode(array("index" => $index, "message" => $message));
+        //                 }
+        //             }
+        //         }
+        //     }
+        //     catch (Exception $e) 
+        //     {
+        //         $objum->close_db();	
+        //         throw $e;
+        //     }
+        // }
+
         public static function reset(){
             try{
                 $objum = new userModel();
@@ -191,17 +264,18 @@
                             $row = mysqli_fetch_array($res);
                             $rst = $row['password'];
 
-                            $mail = new PHPMailer();
-                            $mail->isSMTP();
-                            $mail->Host = 'smtp.gmail.com';
-                            $mail->SMTPAuth = true;
-                            $mail->Username = 'mirwaisdst@gmail.com';
-                            $mail->Password = 'loveisthebest';
-                            $mail->port = '587'; //465
-                            $mail->SMTPSecure = 'tls';
-                            $mail->isHTML(true);  
-                            $mail->setFrom('mirwaisdst@gmail.com');
+                            $mail = new PHPMailer(true);
+
+                            $mail->isSMTP();                                            //Send using SMTP
+                            $mail->Host       = 'smtp.gmail.com';                     //Set the SMTP server to send through
+                            $mail->SMTPAuth   = true;                                   //Enable SMTP authentication
+                            $mail->Username   = 'mirwaisdst@gmail.com';                     //SMTP username
+                            $mail->Password   = 'ffsbxtuuakdhszct';                               //SMTP password
+                            $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;            //Enable implicit TLS encryption
+                            $mail->Port       = 465; 
+                            $mail->setFrom('mirwaisdst@gmail.com', 'Marcopolo Inn Guest House');
                             $mail->addAddress($email);
+                            $mail->isHTML(true);  
                             $mail->addBCC('mirwaisdoost@hotmail.com');
                             $mail->Subject = 'RESET PASSWORD';
                             $mailContent = "<h4>Dear $name $lastName,</h4>
