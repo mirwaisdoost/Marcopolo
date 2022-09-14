@@ -2,11 +2,11 @@
     use PHPMailer\PHPMailer\PHPMailer;
     use PHPMailer\PHPMailer\Exception;
     use PHPMailer\PHPMailer\SMTP;
-    require_once "libs/PHPMailer/src/PHPMailer.php";
-    require_once "libs/PHPMailer/src/SMTP.php";
-    require_once "libs/PHPMailer/src/Exception.php";
-    require 'models/userModel.php';
-    require 'models/user.php';
+    require_once "./libs/PHPMailer/src/PHPMailer.php";
+    require_once "./libs/PHPMailer/src/SMTP.php";
+    require_once "./libs/PHPMailer/src/Exception.php";
+    require './models/userModel.php';
+    require './models/user.php';
 
     // session_status() === PHP_SESSION_ACTIVE ? TRUE : session_start();
     
@@ -84,7 +84,7 @@
                             header('location:Dashboard');
                         }else{
                             $_SESSION['usertbl']=serialize($user);//add session obj           
-                            header('location:Login');
+                            header('location:login');
                         }
 
                         $query->close();
@@ -92,7 +92,7 @@
                     }else
                     {    
                         $_SESSION['usertbl']=serialize($user);//add session obj           
-                        header('location:Login');                
+                        header('location:login');                
                     }
                 }
             }catch (Exception $e) 
@@ -591,7 +591,7 @@
                 header("location: Dashboard.php");
                 exit;
             }else{
-                include "./Views/Account/Login.php";  
+                include "./Views/Account/login.php";  
             }                                      
         }
 

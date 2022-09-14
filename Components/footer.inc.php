@@ -27,19 +27,24 @@
         var content = document.getElementsByClassName("wrapper")[0];
         var sidebarContent = document.getElementsByClassName("sidebarContent")[0];  
 
+        sidebar.style.transitionduration=".3s";
+        sidebar.style.transitiontimingfunction="ease-in"
+
+        sidebarContent.style.transitionduration=".3s";
+        sidebarContent.style.transitiontimingfunction="ease-in"
+
         if (sidebar.style.width == "0%") {
             sidebar.style.width = "20%";
             content.style.width="80%";
+            sidebarContent.style.width="100%";
             document.getElementById("btn").className = "fas fa-arrow-left";
         }
         else {
             sidebar.style.width = "0%";
+            sidebarContent.style.width="0%";
             content.style.width = "100%";
             document.getElementById("btn").className = "fas fa-arrow-right";
         }
-
-        sidebar.style.transitionduration=".3s";
-        sidebar.style.transitiontimingfunction="ease-in"
     }
 
     function menue(id) {

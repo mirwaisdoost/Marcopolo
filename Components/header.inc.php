@@ -4,7 +4,7 @@
         session_start();      
 
         if(!isset($_SESSION["id"])){
-            header("location: Login");
+            header("location: login");
         }
 
     ?>
@@ -18,7 +18,7 @@
     </nav>
      <div class="flex">
         <div class="sidebar bg-light shadow-lg">
-            <div class=" mt-4 pt-2 sidebarContent">
+            <div class=" mt-4 pt-2">
                 <div class="mt-2 bg-light row pt-2" style="border-bottom: 1px solid lightgrey;">
                     <div class="col-md-6 text-center" style="border-right: 1px solid lightgrey;">
                         <a class=" btn text-decoration-none" style="font-size: 16px;">Quick Links</a>
@@ -27,7 +27,7 @@
                         <a class=" btn text-decoration-none text-center"  style="font-size: 16px;">Other</a>
                     </div>
                 </div>
-                <div class="p-3">
+                <div class="p-3 sidebarContent">
                     <a href="#" onclick="menue(this.id);" id="10" class="title text-decoration-none">
                         <div>Transactions</div>
                         <div><i id="first" class="fas fa-angle-right"></i></div>

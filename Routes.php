@@ -3,7 +3,7 @@
         account::home();
     });
 
-    Route::set('Login',function(){
+    Route::set('login',function(){
         account::view();
     });
 

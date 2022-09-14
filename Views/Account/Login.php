@@ -68,7 +68,7 @@
                                 </div>
                                 <div class="col-md-10">
                                     <strong style="font-weight: bold; font-size: 12px;" class="font-weight-bold">Fanatic Support</strong>
-                                    <p style="font-size: 12px;">Yes, that's what you get unconditionally with Wiztrav. You are never own your own if something doesn't work as the support team is just a call / email away</p>
+                                    <p style="font-size: 12px;">Yes, that's what you get unconditionally with us. You are never own your own if something doesn't work as the support team is just a call / email away</p>
                                 </div>
                             </div>
                       </div>
