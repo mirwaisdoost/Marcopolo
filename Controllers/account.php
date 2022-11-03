@@ -1,10 +1,10 @@
 <?php
-    use PHPMailer\PHPMailer\PHPMailer;
-    use PHPMailer\PHPMailer\Exception;
-    use PHPMailer\PHPMailer\SMTP;
-    require_once "./libs/PHPMailer/src/PHPMailer.php";
-    require_once "./libs/PHPMailer/src/SMTP.php";
-    require_once "./libs/PHPMailer/src/Exception.php";
+    // use PHPMailer\PHPMailer\PHPMailer;
+    // use PHPMailer\PHPMailer\Exception;
+    // use PHPMailer\PHPMailer\SMTP;
+    // require_once "./libs/PHPMailer/src/PHPMailer.php";
+    // require_once "./libs/PHPMailer/src/SMTP.php";
+    // require_once "./libs/PHPMailer/src/Exception.php";
     require './models/userModel.php';
     require './models/user.php';
 
@@ -32,17 +32,13 @@
                     }else{
                         $user->password = trim($_POST['password']);
                     }
-                    if(empty(trim($_POST["company"]))){
-                        $user->companyId_msg = "Please enter your company.";$noerror=false;
-                    } else{
-                        $user->companyId = trim($_POST["company"]);
-                    }
+                    
 
                     if($noerror==true){
                         // Prepare a select statement
                         $objum =  new userModel();
                         $objum->open_db();
-                        $query=$objum->condb->prepare("SELECT id, username, password, name, last_name, companyId FROM user WHERE username = ?");
+                        $query=$objum->condb->prepare("SELECT id, user_name, password, name, last_name FROM user WHERE user_name = ?");
                         $query->bind_param("s",$user->username);  
                         $query->execute();
                         $res=$query->get_result();
@@ -51,26 +47,14 @@
                         if(sizeof($row) > 0){                    
                             // Bind result variables  
                             if(password_verify(sha1($user->password), password_hash($row['password'],PASSWORD_DEFAULT))){
-                                // Check if password is correct, if yes then check company
-                                if($user->companyId==$row['companyId']){  
-                                    $compid=$row['companyId'];                  
-                                    $query=$objum->condb->prepare("SELECT * FROM company where id=$compid");
-                                    $query->execute();
-                                    $res = $query->get_result();
-                                    $comprow = mysqli_fetch_array($res);
-                    
-                                    // Store data in session variables
-                                    $_SESSION["loggedin"] = true;
-                                    $_SESSION["id"] = $row['id'];
-                                    $_SESSION["username"] = $row['username'];                            
-                                    $_SESSION["name"] = $row['name'];                            
-                                    $_SESSION["last_name"] = $row['last_name'];                            
-                                    $_SESSION["companyId"] = $row['companyId']; 
-                                    $_SESSION["company"] = $comprow["name"];  
-                                    
-                                }else{
-                                    $user->companyId_msg = "Please select a valid company.";$noerror=false;
-                                }
+                                                
+                                // Store data in session variables
+                                $_SESSION["loggedin"] = true;
+                                $_SESSION["id"] = $row['id'];
+                                $_SESSION["username"] = $row['user_name'];                            
+                                $_SESSION["name"] = $row['name'];                            
+                                $_SESSION["last_name"] = $row['last_name'];  
+                                 
                             } else{
                                 // Display an error message if password is not valid
                                 $user->password_msg = "The password you entered was not valid.";$noerror=false;
@@ -193,17 +177,18 @@
         //                     $row = mysqli_fetch_array($res);
         //                     $rst = $row['password'];
 
-        //                     $mail = new PHPMailer();
-        //                     $mail->isSMTP();
-        //                     $mail->Host = 'smtp.gmail.com';
-        //                     $mail->SMTPAuth = true;
-        //                     $mail->Username = 'mirwaisdst@gmail.com';
-        //                     $mail->Password = 'zpzdmddxkmmczdvp';
-        //                     $mail->port = '587'; //465
-        //                     $mail->SMTPSecure = 'tls';
-        //                     $mail->isHTML(true);  
-        //                     $mail->setFrom('mirwaisdst@gmail.com');
+        //                     $mail = new PHPMailer(true);
+
+        //                     $mail->isSMTP();                                            //Send using SMTP
+        //                     $mail->Host       = 'smtp.gmail.com';                     //Set the SMTP server to send through
+        //                     $mail->SMTPAuth   = true;                                   //Enable SMTP authentication
+        //                     $mail->Username   = 'mirwaisdst@gmail.com';                     //SMTP username
+        //                     $mail->Password   = 'ffsbxtuuakdhszct';                               //SMTP password
+        //                     $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;            //Enable implicit TLS encryption
+        //                     $mail->Port       = 465; 
+        //                     $mail->setFrom('mirwaisdst@gmail.com', 'Marcopolo Inn Guest House');
         //                     $mail->addAddress($email);
+        //                     $mail->isHTML(true);  
         //                     $mail->addBCC('mirwaisdoost@hotmail.com');
         //                     $mail->Subject = 'RESET PASSWORD';
         //                     $mailContent = "<h4>Dear $name $lastName,</h4>
@@ -239,78 +224,6 @@
         //         throw $e;
         //     }
         // }
-
-        public static function reset(){
-            try{
-                $objum = new userModel();
-                $message = "";
-                if(isset($_POST['user'])){
-                    $username = $_POST['user'];
-                    $objum->open_db();
-                    $query1=$objum->condb->prepare("SELECT * FROM user WHERE username = '".$username."'"); 
-                    $query1->execute();
-                    $res=$query1->get_result();
-                    $row1 = mysqli_fetch_array($res);
-                    $id = $row1['id'];
-                    $email = $row1['email'];
-                    $name = $row1['name'];
-                    $lastName = $row1['last_name'];
-                    if(!empty($username)){
-                        if(!empty($id)){
-                            $objum->open_db();
-                            $query=$objum->condb->prepare("SELECT resetpassword('".$id."') as password"); 
-                            $query->execute();
-                            $res=$query->get_result();
-                            $row = mysqli_fetch_array($res);
-                            $rst = $row['password'];
-
-                            $mail = new PHPMailer(true);
-
-                            $mail->isSMTP();                                            //Send using SMTP
-                            $mail->Host       = 'smtp.gmail.com';                     //Set the SMTP server to send through
-                            $mail->SMTPAuth   = true;                                   //Enable SMTP authentication
-                            $mail->Username   = 'mirwaisdst@gmail.com';                     //SMTP username
-                            $mail->Password   = 'ffsbxtuuakdhszct';                               //SMTP password
-                            $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;            //Enable implicit TLS encryption
-                            $mail->Port       = 465; 
-                            $mail->setFrom('mirwaisdst@gmail.com', 'Marcopolo Inn Guest House');
-                            $mail->addAddress($email);
-                            $mail->isHTML(true);  
-                            $mail->addBCC('mirwaisdoost@hotmail.com');
-                            $mail->Subject = 'RESET PASSWORD';
-                            $mailContent = "<h4>Dear $name $lastName,</h4>
-                                            <p>Your password has been reseted.</p>
-                                            <p>Password: $rst</p>
-                                            <br> 
-                                            <p>Best regards,</p>
-                                            <p>Mirwais Doost</p>
-                                            <p>0093 795 703 071</p>
-                                            <p>0093 708 411 861</p>";
-                            $mail->Body = $mailContent;
-                            
-                            if($mail->send()){
-                                $message = "Mail has been sent succesfully!";
-                                $index = 0;
-                                echo json_encode(array("index" => $index, "message" => $message));
-                            }else{
-                                $index = 1;
-                                $message = "Unable to send email. Please try again. " . $mail->ErrorInfo;
-                                echo json_encode(array("index" => $index, "message" => $message));        
-                            }
-                        }else{
-                            $index = 2;
-                            $message = "No account found with that username.";
-                            echo json_encode(array("index" => $index, "message" => $message));
-                        }
-                    }
-                }
-            }
-            catch (Exception $e) 
-            {
-                $objum->close_db();	
-                throw $e;
-            }
-        }
 
         // add new record
 		public static function insert()
