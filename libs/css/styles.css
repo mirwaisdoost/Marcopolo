@@ -1,0 +1,357 @@
+html,
+body{
+    height: 100%;
+    font-size: 1rem;
+    font-family: sans-serif;
+    margin: 0px;
+    padding:0px;
+}
+
+.wrapper{
+    width: 80%;
+    padding: 8px;
+    font: 14px sans-serif;
+    overflow-x: hidden;
+    padding-bottom: 45px;
+    float: left;
+    transition: width .3s ease-in;
+}
+
+.flex {
+    display: flex;
+    height: inherit;
+}
+
+.sidebar {
+    width: 20%;
+    height:100%;
+    transition: width .3s ease-in;
+    border-right: 3px solid rgb(182, 182, 182);
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    overflow: auto;
+}
+
+
+@media(max-width: 1064px){
+    .sidebar {
+        width:0%;
+    }
+    .sidebarContent{
+        width: 100%;
+    }
+    .wrapper{
+        width: 100%;
+    }
+}
+
+.sidebarContent{
+    width: 100%;
+    transition: width .3s ease-in;
+    overflow: auto;
+}
+
+.title:hover{
+    background:gray;
+    color: white;
+    border-radius:3px;
+    padding:6px;
+}
+
+.title {
+    display: flex;
+    justify-content: space-between;
+    color: grey;
+    padding: 6px;
+    font-weight:bold;
+    font-size: 15px;
+}
+
+.justtitle {
+    display: flex;
+    justify-content: left;
+    color: grey;
+    padding: 6px;
+    font-weight:bold;
+    font-size: 15px;
+}
+
+.justtitle:hover{
+    background:gray;
+    color: white;
+    border-radius:3px;
+    padding:6px;
+}
+
+.submenue-item{
+    margin: 0px 0px 3px 25px;
+    color:grey;
+    font-size: 13px;
+    padding: 4px;
+}
+
+.submenue{
+    display:none;
+    margin-bottom:30px;
+}
+
+.submenue-item:hover{
+    background:gray;
+    color: white;
+    border-radius:3px;
+    padding:4px;
+}
+
+.toolbar{
+    background-color: #efefef;
+    height: 40px;
+}
+
+.toolbar a{
+    color: black;
+    font-weight: bolder;
+}
+
+.page-header{
+    font-size: 1rem;
+}
+
+
+.feature ul{
+    padding-left: 2rem;
+    list-style: none;
+}
+
+.feature ul li{
+    padding-left: 5rem;
+    background-image: url(../img/check.svg);
+    background-repeat: no-repeat;
+    line-height: 1.5rem;
+    margin-bottom: .3rem;
+}
+
+.Login{
+    background-color: #efefef;
+}
+
+.Login a{
+    color: black;
+    font-weight: bolder;
+}
+
+.footer{
+    background-color: darkred;
+    height: 50px;
+    justify-items: center;
+}
+
+.footer a{
+    color: white;
+    text-decoration: none;
+    font-size: .8rem;
+}
+
+.HeaderLine{
+    border-bottom: 3px solid rgb(209, 13, 13);
+    margin-top: 3px;
+}
+
+.FooterLine{
+    border-bottom: 3px solid rgb(182, 182, 182);
+}
+
+.form-border{
+    border: 3px solid rgb(182, 182, 182);
+}
+
+.LoginLine{
+    border-bottom: 1px solid rgb(209, 13, 13);
+}
+
+.form-control:focus{
+    color:#292122;
+    background-color:#fff;
+    border-color: black;
+    outline:0;
+    box-shadow:0 0 0 0px black
+}
+
+.form-control {
+    display: block;
+    width: 100%;
+    padding: 0.100rem 0.75rem;
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.4;
+    color: #212529;
+    background-color: #fff;
+    background-clip: padding-box;
+    border: 1px solid #ced4da;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    border-radius: 0rem;
+    transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+  }
+
+  .form-select {
+    display: block;
+    width: 100%;
+    padding: 0.300rem 0.75rem;
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.5;
+    color: #212529;
+    /* vertical-align: middle; */
+    background-color: #fff;
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%23343a40' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M2 5l6 6 6-6'/%3e%3c/svg%3e");
+    background-repeat: no-repeat;
+    background-position: right 0.75rem center;
+    background-size: 16px 12px;
+    border: 1px solid #ced4da;
+    border-radius: 0rem;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+  }
+  .form-select:focus {
+    border-color: #292122;
+    outline: 0;
+    box-shadow:0 0 0 0px black;
+  }
+
+  .btn {
+    padding: 0.25rem 0.8rem;
+    font-size: 0.875rem;
+    border-radius: 0rem;
+  }
+
+  .btn:focus {
+    outline: 0;
+    box-shadow: 0 0 0 1px black;
+  }
+
+  .btn-danger {
+    color: #fff;
+    background-color: darkred;
+    border-color: darkred;
+  }
+
+  .btn-sm{
+    padding: 0.25rem 0.5rem;
+    font-size: 0.875rem;
+    border-radius: 0rem;
+  }
+
+  .card {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+    word-wrap: break-word;
+    background-color: #fff;
+    background-clip: border-box;
+    border: 1px solid rgba(0, 0, 0, 0.125);
+  }
+
+  .alert {
+    border-radius: 0rem;
+  }
+
+  .image-preview{
+      width: 150px;
+      min-height: 160px;
+      border: 2px solid #dddddd;
+      margin-bottom: 15px;
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: bold;
+      color: #cccccc;
+  }
+
+  .image-preview__image{
+      display: none;
+      width: 100%;
+  }
+
+.menue{
+    visibility: hidden;
+    margin-top: -1px;
+    background: #efefef;
+    width: 150px;
+    float: right;
+    border: 1px solid rgb(209, 13, 13);
+}
+
+li{
+    color:grey;
+    font-size: 13px;
+    padding: 5px;
+}
+
+li:hover a{
+    color:dodgerblue;
+}
+
+li:hover{
+    color:dodgerblue;
+}
+
+
+.menubar{
+    margin-top: 10px;
+    margin-bottom: 0px;
+    font-weight: lighter;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+ul li{
+    list-style-type: none;
+}
+
+ul{
+    padding: 8px;
+}
+
+/* The Modal (background) */
+.modal {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+  }
+  
+  /* Modal Content/Box */
+  .modal-content {
+    background-color: #fefefe;
+    margin: 15% auto; /* 15% from the top and centered */
+    padding: 0px;
+    border: 1px solid #888;
+    width: 300px; /* Could be more or less, depending on screen size */
+  }
+  
+  /* The Close Button */
+  .close {
+    color: rgb(226, 67, 67);
+    float: right;
+    font-size: 20px;
+    font-weight: bold;
+    text-align: right;
+    margin-left: 270px;
+    padding-right: 15px;
+    padding-top: 7px;
+  }
+  
+  .close:hover,
+  .close:focus {
+    color: rgb(243, 14, 14);
+    text-decoration: none;
+    cursor: pointer;
+  }
