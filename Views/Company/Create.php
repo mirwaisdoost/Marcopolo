@@ -37,8 +37,8 @@
         </div>     
         </div>
         <div class="form-group col-md-12">
-                <input type="submit" class="btn btn-success" value="Add" name="room_submit" onclick="add_room();">
-            </div>  
+            <input type="submit" class="btn btn-success" value="Add" name="room_submit" onclick="add_room();">
+        </div>  
     </div>
   </div>
 
