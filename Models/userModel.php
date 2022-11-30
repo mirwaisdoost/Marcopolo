@@ -33,7 +33,7 @@
 			{	
 				$this->open_db();
 				$query=$this->condb->prepare("INSERT INTO user (name,last_name,type,username, email, password, is_active, entry_date, token, companyId, photo) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
-				$query->bind_param("sssssssssss",$obj->name,$obj->lastName,$obj->type,$obj->username,$obj->email,$obj->password,$obj->isActive,$obj->entrydate,$obj->token,$obj->companyId,$obj->photo);
+				$query->bind_param("sssssssssss",$obj->name,$obj->llastName,$obj->type,$obj->username,$obj->email,$obj->password,$obj->isActive,$obj->entrydate,$obj->token,$obj->companyId,$obj->photo);
 				$query->execute();
 				$res= $query->get_result();
 				$last_id=$this->condb->insert_id;
