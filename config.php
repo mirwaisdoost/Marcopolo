@@ -20,6 +20,11 @@ class config
 		$this->user  = "root";
 		$this->pass = "Herat1234";
 		$this->db = "marcopolo";
+		
+		// $this->host = "sql.freedb.tech";
+		// $this->user  = "freedb_passoo";
+		// $this->pass = 'HcSJuu3pzJG$e&H';
+		// $this->db = "freedb_passoo";
 	}
 }
 
